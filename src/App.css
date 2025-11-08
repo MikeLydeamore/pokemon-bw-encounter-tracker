@@ -1,0 +1,139 @@
+.app {
+  min-height: 100vh;
+}
+
+header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.clear-btn {
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  padding: 0.5rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.clear-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+main {
+  padding-bottom: 3rem;
+}
+
+/* New: search + summary block on header left */
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.summary {
+  display: flex;
+  gap: 0.5rem;
+  opacity: 0.95;
+  font-size: 0.9rem;
+}
+
+.summary .dot {
+  opacity: 0.8;
+}
+
+.search-input {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: white;
+  padding: 0.5rem 0.6rem;
+  border-radius: 6px;
+  min-width: 260px;
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Search input clear button */
+.search-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.clear-input {
+  position: absolute;
+  right: 8px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.clear-input:hover {
+  color: #fff;
+}
+
+/* Tiny progress bars under summary */
+.progress-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.progress-row {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  align-items: center;
+  gap: 8px;
+}
+
+.progress-label {
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+.progress {
+  width: 100%;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress .fill {
+  height: 100%;
+  transition: width 0.25s ease;
+}
+
+.progress .fill.slots {
+  background: linear-gradient(90deg, #43e97b, #38f9d7);
+}
+
+.progress .fill.species {
+  background: linear-gradient(90deg, #f7971e, #ffd200);
+}

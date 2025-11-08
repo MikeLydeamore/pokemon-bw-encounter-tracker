@@ -1,0 +1,64 @@
+# Node / Vite
+node_modules/
+dist/
+.tmp/
+.temp/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.log
+
+# Env files (keep secrets out of git)
+.env
+.env.local
+.env.*.local
+
+# Editor & IDE
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Coverage / testing
+coverage/
+.nyc_output/
+.jest-cache/
+.jest/
+
+# TypeScript
+*.tsbuildinfo
+
+# Python (for scraper tools)
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+.pytest_cache/
+.venv/
+venv/
+env/
+
+# Misc build artifacts
+*.swp
+*.swo
+
+# Scraped raw data JSON (ignore generated intermediate artifacts)
+scraped_*.json
+unova_*.json
+raw-data/*.json
+data-cache/*.json
+_*.json
+old_tracker/

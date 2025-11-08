@@ -1,0 +1,77 @@
+.location-card {
+  background: #16161c;
+  border-radius: 10px;
+  padding: 1.25rem 1.25rem 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  border: 1px solid #2c2c34;
+  color: #f2f2f5;
+}
+
+.location-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+  color: #fff;
+  letter-spacing: .5px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.encounters {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.loc-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.mini-btn {
+  background: #272732;
+  color: #e6e6f0;
+  border: 1px solid #3a3a46;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.mini-btn:hover {
+  background: #2e2e3a;
+}
+
+.location-header {
+  cursor: pointer;
+}
+
+.location-header:focus {
+  outline: 2px solid #667eea;
+}
+
+.method-wrapper {
+  margin-bottom: .5rem;
+}
+
+.method-header {
+  cursor: pointer;
+  background: #1f1f26;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.method-header:hover {
+  background: #25252d;
+}
+
+.method-title {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #ddd;
+  letter-spacing: .5px;
+}

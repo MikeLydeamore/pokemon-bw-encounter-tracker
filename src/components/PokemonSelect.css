@@ -1,0 +1,113 @@
+.pokemon-select {
+  position: relative;
+}
+
+.pokemon-select-trigger {
+  background: #2d2d34;
+  border: 1px solid #444;
+  padding: 2px 6px;
+  font-size: 0.7rem;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #eee;
+}
+
+.pokemon-select-trigger:hover {
+  background: #393942;
+}
+
+.pokemon-select-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 20;
+  background: #1e1e24;
+  border: 1px solid #3a3a42;
+  width: 220px;
+  padding: 6px 6px 8px;
+  border-radius: 6px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+}
+
+.pokemon-select-controls {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.pokemon-filter {
+  flex: 1;
+  padding: 4px 6px;
+  font-size: 0.7rem;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background: #2a2a30;
+  color: #eee;
+}
+
+.pokemon-filter:focus {
+  outline: 2px solid #667eea;
+}
+
+.close-btn {
+  background: #2d2d34;
+  border: 1px solid #444;
+  font-size: 0.7rem;
+  padding: 4px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #ccc;
+}
+
+.close-btn:hover {
+  background: #3a3a42;
+}
+
+.pokemon-results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.pokemon-results li {
+  margin: 0;
+}
+
+.pokemon-results button {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  color: #ddd;
+  padding: 4px 6px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.pokemon-results button:hover {
+  background: #2d2d34;
+}
+
+.pokemon-results button.active {
+  background: #667eea;
+  color: #fff;
+}
+
+.pokemon-results button.none-option {
+  font-style: italic;
+  opacity: 0.85;
+}
+
+.pokemon-results button.none-option.active {
+  background: #33333b;
+  opacity: 1;
+}
+
+.pokemon-results .empty {
+  color: #777;
+  font-size: 0.7rem;
+  padding: 4px 2px;
+}
