@@ -166,6 +166,47 @@ function App() {
     setMethodExpanded(nextMeth)
   }
 
+  const exportData = () => {
+    const data = {
+      version: 1,
+      timestamp: new Date().toISOString(),
+      checkedEncounters: [...checkedEncounters],
+      selectedMap,
+      query
+    }
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `bw-encounters-${new Date().toISOString().split('T')[0]}.json`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
+  const importData = () => {
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = 'application/json'
+    input.onchange = (e) => {
+      const file = (e.target as HTMLInputElement).files?.[0]
+      if (!file) return
+      const reader = new FileReader()
+      reader.onload = (ev) => {
+        try {
+          const data = JSON.parse(ev.target?.result as string)
+          if (data.checkedEncounters) setCheckedEncounters(new Set(data.checkedEncounters))
+          if (data.selectedMap) setSelectedMap(data.selectedMap)
+          if (data.query !== undefined) setQuery(data.query)
+          alert('Import successful!')
+        } catch (err) {
+          alert('Failed to import: Invalid file format')
+        }
+      }
+      reader.readAsText(file)
+    }
+    input.click()
+  }
+
   return (
     <div className="app">
       <header>
@@ -208,6 +249,8 @@ function App() {
           </div>
         </div>
         <div className="header-actions">
+          <button onClick={exportData} className="clear-btn" title="Export progress to file">💾 Export</button>
+          <button onClick={importData} className="clear-btn" title="Import progress from file">📂 Import</button>
           <button onClick={() => setAllExpanded(true)} className="clear-btn">Expand All</button>
           <button onClick={() => setAllExpanded(false)} className="clear-btn">Collapse All</button>
           <button onClick={clearAll} className="clear-btn">Clear All</button>

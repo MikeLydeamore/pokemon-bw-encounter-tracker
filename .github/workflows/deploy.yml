@@ -36,6 +36,9 @@ jobs:
       - name: Add 404 fallback (SPA routing support)
         run: cp dist/index.html dist/404.html
 
+      - name: Remove CNAME to prevent custom domain redirect
+        run: rm -f dist/CNAME
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
