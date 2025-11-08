@@ -39,27 +39,18 @@ function App() {
   }, [query])
 
   // Compute total slots and set of valid encounter ids
-  const { totalSlots, allIds } = useMemo(() => {
-    const ids = new Set<string>()
+  const totalSlots = useMemo(() => {
     let total = 0
     for (const loc of locationsData) {
       for (const m of loc.encounters) {
-        for (let i = 0; i < m.entries.length; i++) {
-          ids.add(`${loc.id}-${m.type}-${i}`)
-          total++
-        }
+        total += m.entries.length
       }
     }
-    return { totalSlots: total, allIds: ids }
+    return total
   }, [])
 
-  const filledSlots = useMemo(() => {
-    let count = 0
-    for (const [id, val] of Object.entries(selectedMap)) {
-      if (val && allIds.has(id)) count++
-    }
-    return count
-  }, [selectedMap, allIds])
+  // Number of checked/ticked encounters
+  const tickedCount = useMemo(() => checkedEncounters.size, [checkedEncounters])
 
   const uniqueSpeciesCount = useMemo(() => {
     const s = new Set<string>()
@@ -69,7 +60,7 @@ function App() {
     return s.size
   }, [selectedMap])
 
-  const slotPct = useMemo(() => totalSlots ? Math.round((filledSlots / totalSlots) * 100) : 0, [filledSlots, totalSlots])
+  const slotPct = useMemo(() => totalSlots ? Math.round((tickedCount / totalSlots) * 100) : 0, [tickedCount, totalSlots])
   const speciesPct = useMemo(() => allPokemon.length ? Math.round((uniqueSpeciesCount / allPokemon.length) * 100) : 0, [uniqueSpeciesCount])
 
   // Persist search query
@@ -213,7 +204,7 @@ function App() {
         <div className="header-left">
           <h1>Pokemon Black & White Encounter Tracker</h1>
           <div className="summary">
-            <span>Slots: {filledSlots} / {totalSlots} ({slotPct}%)</span>
+            <span>Slots: {tickedCount} / {totalSlots} ({slotPct}%)</span>
             <span className="dot">•</span>
             <span>Species: {uniqueSpeciesCount} / {allPokemon.length} ({speciesPct}%)</span>
           </div>
