@@ -137,3 +137,29 @@ main {
 .progress .fill.species {
   background: linear-gradient(90deg, #f7971e, #ffd200);
 }
+
+/* Version hide controls */
+.version-hide-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.4rem;
+  font-size: 0.75rem;
+  background: rgba(0,0,0,0.18);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+.version-hide-controls .vh-label {
+  opacity: 0.85;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.version-hide-controls .vh-opt input { margin-right: 4px; }
+.version-hide-controls .vh-opt { cursor: pointer; }
+
+.encounter-table.empty {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8rem;
+  opacity: 0.85;
+}

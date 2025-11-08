@@ -11,9 +11,10 @@ export type EncounterType =
   | 'special';
 
 export interface EncounterEntry {
-  name: string;
-  rate?: number; // percent if available
-  note?: string; // levels/rarity or extra notes
+    name: string; // may include (B) or (W) suffix for version exclusives
+    rate?: number; // percent if available
+    note?: string; // levels/rarity or extra notes
+    versionTag?: 'B' | 'W'; // present if exclusive to one version
 }
 
 export interface EncounterMethod {
@@ -46,24 +47,28 @@ export const data = {
               "note": "47-49 | Rarity: Common"
             },
             {
-              "name": "Cottonee",
-              "note": "Rarity: Uncommon"
+              "name": "Cottonee (B)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "B"
             },
             {
-              "name": "Misdreavus",
-              "note": "Rarity: Rare"
+              "name": "Misdreavus (W)",
+              "note": "Rarity: Rare",
+              "versionTag": "W"
             },
             {
-              "name": "Murkrow",
-              "note": "Rarity: Rare"
+              "name": "Murkrow (B)",
+              "note": "Rarity: Rare",
+              "versionTag": "B"
             },
             {
               "name": "Noctowl",
               "note": "48-50 | Rarity: Uncommon"
             },
             {
-              "name": "Petilil",
-              "note": "Rarity: Uncommon"
+              "name": "Petilil (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
               "name": "Stantler",
@@ -87,24 +92,28 @@ export const data = {
               "note": "57-59 | Rarity: Common"
             },
             {
-              "name": "Cottonee",
-              "note": "Rarity: Uncommon"
+              "name": "Cottonee (B)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "B"
             },
             {
-              "name": "Misdreavus",
-              "note": "Rarity: Rare"
+              "name": "Misdreavus (W)",
+              "note": "Rarity: Rare",
+              "versionTag": "W"
             },
             {
-              "name": "Murkrow",
-              "note": "Rarity: Rare"
+              "name": "Murkrow (B)",
+              "note": "Rarity: Rare",
+              "versionTag": "B"
             },
             {
               "name": "Noctowl",
               "note": "58-60 | Rarity: Uncommon"
             },
             {
-              "name": "Petilil",
-              "note": "Rarity: Uncommon"
+              "name": "Petilil (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
               "name": "Stantler",
@@ -151,11 +160,7 @@ export const data = {
             },
             {
               "name": "Basculin",
-              "note": "25-60 | Rarity: Common"
-            },
-            {
-              "name": "Basculin",
-              "note": "35-60 | Rarity: Common"
+              "note": "25-60 | Rarity: Common | 35-60 | Rarity: Common"
             },
             {
               "name": "Emolga",
@@ -166,16 +171,19 @@ export const data = {
               "note": "35-60 | Rarity: Common"
             },
             {
-              "name": "Honchkrow",
-              "note": "Rarity: Rare"
+              "name": "Honchkrow (B)",
+              "note": "Rarity: Rare",
+              "versionTag": "B"
             },
             {
-              "name": "Lilligant",
-              "note": "Rarity: Rare"
+              "name": "Lilligant (W)",
+              "note": "Rarity: Rare",
+              "versionTag": "W"
             },
             {
-              "name": "Mismagius",
-              "note": "Rarity: Rare"
+              "name": "Mismagius (W)",
+              "note": "Rarity: Rare",
+              "versionTag": "W"
             },
             {
               "name": "Ninetales",
@@ -198,8 +206,9 @@ export const data = {
               "note": "25-60 | Rarity: Common"
             },
             {
-              "name": "Whimsicott",
-              "note": "Rarity: Rare"
+              "name": "Whimsicott (B)",
+              "note": "Rarity: Rare",
+              "versionTag": "B"
             }
           ]
         }
@@ -214,11 +223,7 @@ export const data = {
           "entries": [
             {
               "name": "Elgyem",
-              "note": "26-27 | Rarity: Uncommon"
-            },
-            {
-              "name": "Elgyem",
-              "note": "26-29 | Rarity: Common"
+              "note": "26-27 | Rarity: Uncommon | 26-29 | Rarity: Common"
             },
             {
               "name": "Litwick",
@@ -296,11 +301,7 @@ export const data = {
           "entries": [
             {
               "name": "Basculin",
-              "note": "25-70 | Rarity: Common"
-            },
-            {
-              "name": "Basculin",
-              "note": "35-60 | Rarity: Common"
+              "note": "25-70 | Rarity: Common | 35-60 | Rarity: Common"
             },
             {
               "name": "Excadrill",
@@ -331,15 +332,7 @@ export const data = {
             },
             {
               "name": "Ferroseed",
-              "note": "24-25 | Rarity: Uncommon"
-            },
-            {
-              "name": "Ferroseed",
-              "note": "25-26 | Rarity: Uncommon"
-            },
-            {
-              "name": "Ferroseed",
-              "note": "26-27 | Rarity: Uncommon"
+              "note": "24-25 | Rarity: Uncommon | 25-26 | Rarity: Uncommon | 26-27 | Rarity: Uncommon"
             },
             {
               "name": "Joltik",
@@ -351,11 +344,7 @@ export const data = {
             },
             {
               "name": "Tynamo",
-              "note": "Rarity: Rare"
-            },
-            {
-              "name": "Tynamo",
-              "note": "Rarity: Uncommon"
+              "note": "Rarity: Rare | Rarity: Uncommon"
             }
           ]
         },
@@ -483,19 +472,11 @@ export const data = {
             },
             {
               "name": "Deerling",
-              "note": "30-32 | Rarity: Common"
-            },
-            {
-              "name": "Deerling",
-              "note": "31-32 | Rarity: Common"
+              "note": "30-32 | Rarity: Common | 31-32 | Rarity: Common"
             },
             {
               "name": "Druddigon",
-              "note": "30-33 | Rarity: Common"
-            },
-            {
-              "name": "Druddigon",
-              "note": "31-33 | Rarity: Uncommon"
+              "note": "30-33 | Rarity: Common | 31-33 | Rarity: Uncommon"
             },
             {
               "name": "Golett",
@@ -503,15 +484,7 @@ export const data = {
             },
             {
               "name": "Mienfoo",
-              "note": "Rarity: Uncommon"
-            },
-            {
-              "name": "Mienfoo",
-              "note": "30-33 | Rarity: Common"
-            },
-            {
-              "name": "Mienfoo",
-              "note": "31-33 | Rarity: Common"
+              "note": "Rarity: Uncommon | 30-33 | Rarity: Common | 31-33 | Rarity: Common"
             },
             {
               "name": "Tranquill",
@@ -536,19 +509,11 @@ export const data = {
             },
             {
               "name": "Mienfoo",
-              "note": "30-33 | Rarity: Common"
-            },
-            {
-              "name": "Mienfoo",
-              "note": "34-37 | Rarity: Common"
+              "note": "30-33 | Rarity: Common | 34-37 | Rarity: Common"
             },
             {
               "name": "Sawsbuck",
-              "note": "30-32 | Rarity: Common"
-            },
-            {
-              "name": "Sawsbuck",
-              "note": "34-36 | Rarity: Common"
+              "note": "30-32 | Rarity: Common | 34-36 | Rarity: Common"
             },
             {
               "name": "Tranquill",
@@ -595,11 +560,7 @@ export const data = {
             },
             {
               "name": "Basculin",
-              "note": "15-40 | Rarity: Common"
-            },
-            {
-              "name": "Basculin",
-              "note": "35-60 | Rarity: Common"
+              "note": "15-40 | Rarity: Common | 35-60 | Rarity: Common"
             },
             {
               "name": "Dragonair",
@@ -646,11 +607,7 @@ export const data = {
             },
             {
               "name": "Munna",
-              "note": "48-49 | Rarity: Uncommon"
-            },
-            {
-              "name": "Munna",
-              "note": "8-10 | Rarity: Uncommon"
+              "note": "48-49 | Rarity: Uncommon | 8-10 | Rarity: Uncommon"
             },
             {
               "name": "Patrat",
@@ -827,19 +784,11 @@ export const data = {
             },
             {
               "name": "Golbat",
-              "note": "Rarity: Uncommon"
-            },
-            {
-              "name": "Golbat",
-              "note": "48-50 | Rarity: Uncommon"
+              "note": "Rarity: Uncommon | 48-50 | Rarity: Uncommon"
             },
             {
               "name": "Jynx",
-              "note": "48-50 | Rarity: Uncommon"
-            },
-            {
-              "name": "Jynx",
-              "note": "58-60 | Rarity: Uncommon"
+              "note": "48-50 | Rarity: Uncommon | 58-60 | Rarity: Uncommon"
             },
             {
               "name": "Lunatone",
@@ -851,15 +800,7 @@ export const data = {
             },
             {
               "name": "Piloswine",
-              "note": "47-49 | Rarity: Common"
-            },
-            {
-              "name": "Piloswine",
-              "note": "57-59 | Rarity: Common"
-            },
-            {
-              "name": "Piloswine",
-              "note": "52-54 | Rarity: Common"
+              "note": "47-49 | Rarity: Common | 57-59 | Rarity: Common | 52-54 | Rarity: Common"
             },
             {
               "name": "Sneasel",
@@ -963,19 +904,11 @@ export const data = {
           "entries": [
             {
               "name": "Audino",
-              "note": "47-50 | Rarity: Common"
-            },
-            {
-              "name": "Audino",
-              "note": "52-55 | Rarity: Common"
+              "note": "47-50 | Rarity: Common | 52-55 | Rarity: Common"
             },
             {
               "name": "Basculin",
-              "note": "25-60 | Rarity: Common"
-            },
-            {
-              "name": "Basculin",
-              "note": "35-60 | Rarity: Common"
+              "note": "25-60 | Rarity: Common | 35-60 | Rarity: Common"
             },
             {
               "name": "Clefable",
@@ -991,11 +924,7 @@ export const data = {
             },
             {
               "name": "Excadrill",
-              "note": "47-50 | Rarity: Common"
-            },
-            {
-              "name": "Excadrill",
-              "note": "57-60 | Rarity: Common"
+              "note": "47-50 | Rarity: Common | 57-60 | Rarity: Common"
             },
             {
               "name": "Mamoswine",
@@ -1081,11 +1010,7 @@ export const data = {
             },
             {
               "name": "Stunfisk",
-              "note": "15-40 | Rarity: Common"
-            },
-            {
-              "name": "Stunfisk",
-              "note": "35-60 | Rarity: Common"
+              "note": "15-40 | Rarity: Common | 35-60 | Rarity: Common"
             },
             {
               "name": "Whiscash",
@@ -1103,12 +1028,14 @@ export const data = {
           "type": "grass",
           "entries": [
             {
-              "name": "Cottonee",
-              "note": "19-22 | Rarity: Common"
+              "name": "Cottonee (B)",
+              "note": "19-22 | Rarity: Common",
+              "versionTag": "B"
             },
             {
-              "name": "Petilil",
-              "note": "19-22 | Rarity: Common"
+              "name": "Petilil (W)",
+              "note": "19-22 | Rarity: Common",
+              "versionTag": "W"
             },
             {
               "name": "Swadloon",
@@ -1128,12 +1055,14 @@ export const data = {
           "type": "dark-grass",
           "entries": [
             {
-              "name": "Cottonee",
-              "note": "19-22 | Rarity: Common"
+              "name": "Cottonee (B)",
+              "note": "19-22 | Rarity: Common",
+              "versionTag": "B"
             },
             {
-              "name": "Petilil",
-              "note": "19-22 | Rarity: Common"
+              "name": "Petilil (W)",
+              "note": "19-22 | Rarity: Common",
+              "versionTag": "W"
             },
             {
               "name": "Swadloon",
@@ -1180,11 +1109,7 @@ export const data = {
             },
             {
               "name": "Basculin",
-              "note": "5-20 | Rarity: Common"
-            },
-            {
-              "name": "Basculin",
-              "note": "35-60 | Rarity: Common"
+              "note": "5-20 | Rarity: Common | 35-60 | Rarity: Common"
             },
             {
               "name": "Emolga",
@@ -1199,8 +1124,9 @@ export const data = {
               "note": "Rarity: Rare"
             },
             {
-              "name": "Lilligant",
-              "note": "Rarity: Rare"
+              "name": "Lilligant (W)",
+              "note": "Rarity: Rare",
+              "versionTag": "W"
             },
             {
               "name": "Panpour",
@@ -1223,8 +1149,9 @@ export const data = {
               "note": "Rarity: Rare"
             },
             {
-              "name": "Whimsicott",
-              "note": "Rarity: Rare"
+              "name": "Whimsicott (B)",
+              "note": "Rarity: Rare",
+              "versionTag": "B"
             }
           ]
         }
@@ -1333,11 +1260,7 @@ export const data = {
             },
             {
               "name": "Stunfisk",
-              "note": "15-40 | Rarity: Common"
-            },
-            {
-              "name": "Stunfisk",
-              "note": "35-60 | Rarity: Common"
+              "note": "15-40 | Rarity: Common | 35-60 | Rarity: Common"
             },
             {
               "name": "Whiscash",
@@ -1433,32 +1356,32 @@ export const data = {
           "type": "grass",
           "entries": [
             {
-              "name": "Cottonee",
-              "note": "14-17 | Rarity: Common"
+              "name": "Cottonee (B)",
+              "note": "14-17 | Rarity: Common",
+              "versionTag": "B"
             },
             {
-              "name": "Petilil",
-              "note": "14-17 | Rarity: Common"
+              "name": "Petilil (W)",
+              "note": "14-17 | Rarity: Common",
+              "versionTag": "W"
             },
             {
               "name": "Pidove",
-              "note": "15-16 | Rarity: Uncommon"
+              "note": "15-16 | Rarity: Uncommon | 12-15 | Rarity: Common"
             },
             {
-              "name": "Pidove",
-              "note": "12-15 | Rarity: Common"
-            },
-            {
-              "name": "Sawk",
-              "note": "12-17 | Rarity: Uncommon"
+              "name": "Sawk (B)",
+              "note": "12-17 | Rarity: Uncommon",
+              "versionTag": "B"
             },
             {
               "name": "Sewaddle",
               "note": "14-17 | Rarity: Common"
             },
             {
-              "name": "Throh",
-              "note": "12-17 | Rarity: Uncommon"
+              "name": "Throh (W)",
+              "note": "12-17 | Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
               "name": "Timburr",
@@ -1478,12 +1401,14 @@ export const data = {
           "type": "dark-grass",
           "entries": [
             {
-              "name": "Cottonee",
-              "note": "22-25 | Rarity: Common"
+              "name": "Cottonee (B)",
+              "note": "22-25 | Rarity: Common",
+              "versionTag": "B"
             },
             {
-              "name": "Petilil",
-              "note": "22-25 | Rarity: Common"
+              "name": "Petilil (W)",
+              "note": "22-25 | Rarity: Common",
+              "versionTag": "W"
             },
             {
               "name": "Swadloon",
@@ -1526,27 +1451,20 @@ export const data = {
           "entries": [
             {
               "name": "Audino",
-              "note": "14-17 | Rarity: Common"
-            },
-            {
-              "name": "Audino",
-              "note": "12-15 | Rarity: Common"
+              "note": "14-17 | Rarity: Common | 12-15 | Rarity: Common"
             },
             {
               "name": "Basculin",
-              "note": "5-20 | Rarity: Common"
-            },
-            {
-              "name": "Basculin",
-              "note": "35-60 | Rarity: Common"
+              "note": "5-20 | Rarity: Common | 35-60 | Rarity: Common"
             },
             {
               "name": "Goldeen",
               "note": "35-60 | Rarity: Common"
             },
             {
-              "name": "Lilligant",
-              "note": "Rarity: Rare"
+              "name": "Lilligant (W)",
+              "note": "Rarity: Rare",
+              "versionTag": "W"
             },
             {
               "name": "Panpour",
@@ -1561,20 +1479,23 @@ export const data = {
               "note": "Rarity: Uncommon"
             },
             {
-              "name": "Sawk",
-              "note": "Rarity: Rare"
+              "name": "Sawk (W)",
+              "note": "Rarity: Rare",
+              "versionTag": "W"
             },
             {
               "name": "Seaking",
               "note": "35-70 | Rarity: Uncommon"
             },
             {
-              "name": "Throh",
-              "note": "Rarity: Rare"
+              "name": "Throh (B)",
+              "note": "Rarity: Rare",
+              "versionTag": "B"
             },
             {
-              "name": "Whimsicott",
-              "note": "Rarity: Rare"
+              "name": "Whimsicott (B)",
+              "note": "Rarity: Rare",
+              "versionTag": "B"
             }
           ]
         }
@@ -1593,19 +1514,11 @@ export const data = {
             },
             {
               "name": "Cofagrigus",
-              "note": "34-37 | Rarity: Common"
-            },
-            {
-              "name": "Cofagrigus",
-              "note": "48-50 | Rarity: Uncommon"
+              "note": "34-37 | Rarity: Common | 48-50 | Rarity: Uncommon"
             },
             {
               "name": "Krokorok",
-              "note": "34-37 | Rarity: Common"
-            },
-            {
-              "name": "Krokorok",
-              "note": "47-50 | Rarity: Common"
+              "note": "34-37 | Rarity: Common | 47-50 | Rarity: Common"
             },
             {
               "name": "Onix",
@@ -1635,10 +1548,12 @@ export const data = {
           "type": "grass",
           "entries": [
             {
-              "name": "Thundurus"
+              "name": "Thundurus (W)",
+              "versionTag": "W"
             },
             {
-              "name": "Tornadus"
+              "name": "Tornadus (B)",
+              "versionTag": "B"
             }
           ]
         }
@@ -1709,11 +1624,7 @@ export const data = {
             },
             {
               "name": "Basculin",
-              "note": "5-20 | Rarity: Common"
-            },
-            {
-              "name": "Basculin",
-              "note": "35-70 | Rarity: Common"
+              "note": "5-20 | Rarity: Common | 35-70 | Rarity: Common"
             },
             {
               "name": "Farfetch'd",
@@ -1751,20 +1662,24 @@ export const data = {
               "note": "33-34 | Rarity: Common"
             },
             {
-              "name": "Rufflet",
-              "note": "34-36 | Rarity: Common"
+              "name": "Rufflet (W)",
+              "note": "34-36 | Rarity: Common",
+              "versionTag": "W"
             },
             {
-              "name": "Sawk",
-              "note": "33-36 | Rarity: Uncommon"
+              "name": "Sawk (B)",
+              "note": "33-36 | Rarity: Uncommon",
+              "versionTag": "B"
             },
             {
-              "name": "Throh",
-              "note": "33-36 | Rarity: Uncommon"
+              "name": "Throh (W)",
+              "note": "33-36 | Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Vullaby",
-              "note": "34-36 | Rarity: Common"
+              "name": "Vullaby (B)",
+              "note": "34-36 | Rarity: Common",
+              "versionTag": "B"
             }
           ]
         },
@@ -1784,20 +1699,24 @@ export const data = {
               "note": "38-39 | Rarity: Common"
             },
             {
-              "name": "Rufflet",
-              "note": "39-41 | Rarity: Common"
+              "name": "Rufflet (W)",
+              "note": "39-41 | Rarity: Common",
+              "versionTag": "W"
             },
             {
-              "name": "Sawk",
-              "note": "38-41 | Rarity: Uncommon"
+              "name": "Sawk (B)",
+              "note": "38-41 | Rarity: Uncommon",
+              "versionTag": "B"
             },
             {
-              "name": "Throh",
-              "note": "38-41 | Rarity: Uncommon"
+              "name": "Throh (W)",
+              "note": "38-41 | Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Vullaby",
-              "note": "39-41 | Rarity: Common"
+              "name": "Vullaby (B)",
+              "note": "39-41 | Rarity: Common",
+              "versionTag": "B"
             }
           ]
         },
@@ -1813,16 +1732,18 @@ export const data = {
               "note": "Rarity: Uncommon"
             },
             {
-              "name": "Sawk",
-              "note": "Rarity: Rare"
+              "name": "Sawk (W)",
+              "note": "Rarity: Rare",
+              "versionTag": "W"
             },
             {
               "name": "Stoutland",
               "note": "Rarity: Rare"
             },
             {
-              "name": "Throh",
-              "note": "Rarity: Rare"
+              "name": "Throh (B)",
+              "note": "Rarity: Rare",
+              "versionTag": "B"
             },
             {
               "name": "Tyrogue",
@@ -1860,16 +1781,18 @@ export const data = {
               "note": "Rarity: Rare"
             },
             {
-              "name": "Rufflet",
-              "note": "48-50 | Rarity: Common"
+              "name": "Rufflet (W)",
+              "note": "48-50 | Rarity: Common",
+              "versionTag": "W"
             },
             {
               "name": "Seviper",
               "note": "Rarity: Uncommon"
             },
             {
-              "name": "Vullaby",
-              "note": "48-50 | Rarity: Common"
+              "name": "Vullaby (B)",
+              "note": "48-50 | Rarity: Common",
+              "versionTag": "B"
             },
             {
               "name": "Zangoose",
@@ -1889,8 +1812,9 @@ export const data = {
               "note": "Rarity: Rare"
             },
             {
-              "name": "Braviary",
-              "note": "58-60 | Rarity: Common"
+              "name": "Braviary (W)",
+              "note": "58-60 | Rarity: Common",
+              "versionTag": "W"
             },
             {
               "name": "Gligar",
@@ -1905,8 +1829,9 @@ export const data = {
               "note": "Rarity: Rare"
             },
             {
-              "name": "Mandibuzz",
-              "note": "58-60 | Rarity: Common"
+              "name": "Mandibuzz (B)",
+              "note": "58-60 | Rarity: Common",
+              "versionTag": "B"
             },
             {
               "name": "Seviper",
@@ -1953,11 +1878,7 @@ export const data = {
             },
             {
               "name": "Basculin",
-              "note": "25-60 | Rarity: Common"
-            },
-            {
-              "name": "Basculin",
-              "note": "35-60 | Rarity: Common"
+              "note": "25-60 | Rarity: Common | 35-60 | Rarity: Common"
             },
             {
               "name": "Buizel",
@@ -1980,16 +1901,18 @@ export const data = {
               "note": "35-60 | Rarity: Common"
             },
             {
-              "name": "Paras",
-              "note": "47-48 | Rarity: Common"
+              "name": "Paras (W)",
+              "note": "47-48 | Rarity: Common",
+              "versionTag": "W"
             },
             {
               "name": "Seaking",
               "note": "35-70 | Rarity: Uncommon"
             },
             {
-              "name": "Shroomish",
-              "note": "47-48 | Rarity: Common"
+              "name": "Shroomish (B)",
+              "note": "47-48 | Rarity: Common",
+              "versionTag": "B"
             }
           ]
         }
@@ -2019,12 +1942,14 @@ export const data = {
               "note": "Rarity: Rare"
             },
             {
-              "name": "Kakuna",
-              "note": "Rarity: Uncommon"
+              "name": "Kakuna (B)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "B"
             },
             {
-              "name": "Metapod",
-              "note": "Rarity: Uncommon"
+              "name": "Metapod (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
               "name": "Pinsir",
@@ -2064,12 +1989,14 @@ export const data = {
               "note": "Rarity: Rare"
             },
             {
-              "name": "Kakuna",
-              "note": "Rarity: Uncommon"
+              "name": "Kakuna (B)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "B"
             },
             {
-              "name": "Metapod",
-              "note": "Rarity: Uncommon"
+              "name": "Metapod (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
               "name": "Pinsir",
@@ -2097,12 +2024,14 @@ export const data = {
               "note": "47-50 | Rarity: Common"
             },
             {
-              "name": "Beedrill",
-              "note": "Rarity: Rare"
+              "name": "Beedrill (B)",
+              "note": "Rarity: Rare",
+              "versionTag": "B"
             },
             {
-              "name": "Butterfree",
-              "note": "Rarity: Rare"
+              "name": "Butterfree (W)",
+              "note": "Rarity: Rare",
+              "versionTag": "W"
             },
             {
               "name": "Doduo",
@@ -2379,11 +2308,7 @@ export const data = {
           "entries": [
             {
               "name": "Basculin",
-              "note": "35-55 | Rarity: Common"
-            },
-            {
-              "name": "Basculin",
-              "note": "35-55 | Rarity: Rare"
+              "note": "35-55 | Rarity: Common | 35-55 | Rarity: Rare"
             },
             {
               "name": "Goldeen",
@@ -2400,11 +2325,7 @@ export const data = {
             },
             {
               "name": "Basculin",
-              "note": "25-60 | Rarity: Common"
-            },
-            {
-              "name": "Basculin",
-              "note": "35-60 | Rarity: Common"
+              "note": "25-60 | Rarity: Common | 35-60 | Rarity: Common"
             },
             {
               "name": "Buizel",
@@ -2462,12 +2383,14 @@ export const data = {
               "note": "Rarity: Uncommon"
             },
             {
-              "name": "Sawk",
-              "note": "48-49 | Rarity: Uncommon"
+              "name": "Sawk (B)",
+              "note": "48-49 | Rarity: Uncommon",
+              "versionTag": "B"
             },
             {
-              "name": "Throh",
-              "note": "48-49 | Rarity: Uncommon"
+              "name": "Throh (W)",
+              "note": "48-49 | Rarity: Uncommon",
+              "versionTag": "W"
             }
           ]
         },
@@ -2495,12 +2418,14 @@ export const data = {
               "note": "Rarity: Uncommon"
             },
             {
-              "name": "Sawk",
-              "note": "58-59 | Rarity: Uncommon"
+              "name": "Sawk (B)",
+              "note": "58-59 | Rarity: Uncommon",
+              "versionTag": "B"
             },
             {
-              "name": "Throh",
-              "note": "58-59 | Rarity: Uncommon"
+              "name": "Throh (W)",
+              "note": "58-59 | Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
               "name": "Watchog",
@@ -2528,12 +2453,14 @@ export const data = {
               "note": "47-48 | Rarity: Common"
             },
             {
-              "name": "Sawk",
-              "note": "Rarity: Rare"
+              "name": "Sawk (W)",
+              "note": "Rarity: Rare",
+              "versionTag": "W"
             },
             {
-              "name": "Throh",
-              "note": "Rarity: Rare"
+              "name": "Throh (B)",
+              "note": "Rarity: Rare",
+              "versionTag": "B"
             },
             {
               "name": "Tyranitar",
@@ -2551,8 +2478,9 @@ export const data = {
           "type": "grass",
           "entries": [
             {
-              "name": "Gothita",
-              "note": "19-22 | Rarity: Common"
+              "name": "Gothita (B)",
+              "note": "19-22 | Rarity: Common",
+              "versionTag": "B"
             },
             {
               "name": "Liepard",
@@ -2563,8 +2491,9 @@ export const data = {
               "note": "19-22 | Rarity: Common"
             },
             {
-              "name": "Solosis",
-              "note": "19-22 | Rarity: Common"
+              "name": "Solosis (W)",
+              "note": "19-22 | Rarity: Common",
+              "versionTag": "W"
             },
             {
               "name": "Trubbish",
@@ -2576,8 +2505,9 @@ export const data = {
           "type": "dark-grass",
           "entries": [
             {
-              "name": "Gothita",
-              "note": "22-25 | Rarity: Common"
+              "name": "Gothita (B)",
+              "note": "22-25 | Rarity: Common",
+              "versionTag": "B"
             },
             {
               "name": "Liepard",
@@ -2588,8 +2518,9 @@ export const data = {
               "note": "22-25 | Rarity: Common"
             },
             {
-              "name": "Solosis",
-              "note": "22-25 | Rarity: Common"
+              "name": "Solosis (W)",
+              "note": "22-25 | Rarity: Common",
+              "versionTag": "W"
             },
             {
               "name": "Trubbish",
@@ -2673,16 +2604,18 @@ export const data = {
               "note": "30-31 | Rarity: Common"
             },
             {
-              "name": "Sawk",
-              "note": "29-31 | Rarity: Uncommon"
+              "name": "Sawk (B)",
+              "note": "29-31 | Rarity: Uncommon",
+              "versionTag": "B"
             },
             {
               "name": "Scraggy",
               "note": "28-31 | Rarity: Common"
             },
             {
-              "name": "Throh",
-              "note": "29-31 | Rarity: Uncommon"
+              "name": "Throh (W)",
+              "note": "29-31 | Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
               "name": "Watchog",
@@ -2698,16 +2631,18 @@ export const data = {
               "note": "34-35 | Rarity: Common"
             },
             {
-              "name": "Sawk",
-              "note": "33-35 | Rarity: Uncommon"
+              "name": "Sawk (B)",
+              "note": "33-35 | Rarity: Uncommon",
+              "versionTag": "B"
             },
             {
               "name": "Scraggy",
               "note": "32-35 | Rarity: Common"
             },
             {
-              "name": "Throh",
-              "note": "33-35 | Rarity: Uncommon"
+              "name": "Throh (W)",
+              "note": "33-35 | Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
               "name": "Watchog",
@@ -2761,12 +2696,14 @@ export const data = {
               "note": "5-20 | Rarity: Rare"
             },
             {
-              "name": "Sawk",
-              "note": "Rarity: Rare"
+              "name": "Sawk (W)",
+              "note": "Rarity: Rare",
+              "versionTag": "W"
             },
             {
-              "name": "Throh",
-              "note": "Rarity: Rare"
+              "name": "Throh (B)",
+              "note": "Rarity: Rare",
+              "versionTag": "B"
             }
           ]
         }
@@ -2893,27 +2830,25 @@ export const data = {
             },
             {
               "name": "Basculin",
-              "note": "5-20 | Rarity: Common"
-            },
-            {
-              "name": "Basculin",
-              "note": "35-60 | Rarity: Common"
+              "note": "5-20 | Rarity: Common | 35-60 | Rarity: Common"
             },
             {
               "name": "Goldeen",
               "note": "35-60 | Rarity: Common"
             },
             {
-              "name": "Illumise",
-              "note": "Rarity: Common"
+              "name": "Illumise (W)",
+              "note": "Rarity: Common",
+              "versionTag": "W"
             },
             {
               "name": "Seaking",
               "note": "35-70 | Rarity: Uncommon"
             },
             {
-              "name": "Volbeat",
-              "note": "Rarity: Common"
+              "name": "Volbeat (B)",
+              "note": "Rarity: Common",
+              "versionTag": "B"
             }
           ]
         }
@@ -2974,16 +2909,18 @@ export const data = {
               "note": "5-20 | Rarity: Common"
             },
             {
-              "name": "Gorebyss",
-              "note": "45-70 | Rarity: Rare"
+              "name": "Gorebyss (W)",
+              "note": "45-70 | Rarity: Rare",
+              "versionTag": "W"
             },
             {
               "name": "Hippopotas",
               "note": "Rarity: Common"
             },
             {
-              "name": "Huntail",
-              "note": "45-70 | Rarity: Rare"
+              "name": "Huntail (B)",
+              "note": "45-70 | Rarity: Rare",
+              "versionTag": "B"
             },
             {
               "name": "Jellicent",
@@ -3013,8 +2950,9 @@ export const data = {
           "type": "grass",
           "entries": [
             {
-              "name": "Gothita",
-              "note": "19-22 | Rarity: Common"
+              "name": "Gothita (B)",
+              "note": "19-22 | Rarity: Common",
+              "versionTag": "B"
             },
             {
               "name": "Liepard",
@@ -3025,8 +2963,9 @@ export const data = {
               "note": "19-22 | Rarity: Common"
             },
             {
-              "name": "Solosis",
-              "note": "19-22 | Rarity: Common"
+              "name": "Solosis (W)",
+              "note": "19-22 | Rarity: Common",
+              "versionTag": "W"
             },
             {
               "name": "Trubbish",
@@ -3038,8 +2977,9 @@ export const data = {
           "type": "dark-grass",
           "entries": [
             {
-              "name": "Gothita",
-              "note": "22-25 | Rarity: Common"
+              "name": "Gothita (B)",
+              "note": "22-25 | Rarity: Common",
+              "versionTag": "B"
             },
             {
               "name": "Liepard",
@@ -3050,8 +2990,9 @@ export const data = {
               "note": "22-25 | Rarity: Common"
             },
             {
-              "name": "Solosis",
-              "note": "22-25 | Rarity: Common"
+              "name": "Solosis (W)",
+              "note": "22-25 | Rarity: Common",
+              "versionTag": "W"
             },
             {
               "name": "Trubbish",
@@ -3179,11 +3120,7 @@ export const data = {
             },
             {
               "name": "Basculin",
-              "note": "10-30 | Rarity: Common"
-            },
-            {
-              "name": "Basculin",
-              "note": "35-60 | Rarity: Common"
+              "note": "10-30 | Rarity: Common | 35-60 | Rarity: Common"
             },
             {
               "name": "Emolga",
@@ -3194,12 +3131,14 @@ export const data = {
               "note": "Rarity: Rare"
             },
             {
-              "name": "Minun",
-              "note": "Rarity: Common"
+              "name": "Minun (W)",
+              "note": "Rarity: Common",
+              "versionTag": "W"
             },
             {
-              "name": "Plusle",
-              "note": "Rarity: Common"
+              "name": "Plusle (B)",
+              "note": "Rarity: Common",
+              "versionTag": "B"
             },
             {
               "name": "Politoed",
@@ -3288,11 +3227,7 @@ export const data = {
             },
             {
               "name": "Emolga",
-              "note": "Rarity: Uncommon"
-            },
-            {
-              "name": "Emolga",
-              "note": "27-29 | Rarity: Uncommon"
+              "note": "Rarity: Uncommon | 27-29 | Rarity: Uncommon"
             },
             {
               "name": "Sentret",
@@ -3366,11 +3301,7 @@ export const data = {
             },
             {
               "name": "Stunfisk",
-              "note": "15-40 | Rarity: Common"
-            },
-            {
-              "name": "Stunfisk",
-              "note": "35-60 | Rarity: Common"
+              "note": "15-40 | Rarity: Common | 35-60 | Rarity: Common"
             },
             {
               "name": "Whiscash",
@@ -3388,16 +3319,18 @@ export const data = {
           "type": "grass",
           "entries": [
             {
-              "name": "Duosion",
-              "note": "31-34 | Rarity: Common"
+              "name": "Duosion (W)",
+              "note": "31-34 | Rarity: Common",
+              "versionTag": "W"
             },
             {
               "name": "Garbodor",
               "note": "31-33 | Rarity: Uncommon"
             },
             {
-              "name": "Gothorita",
-              "note": "31-34 | Rarity: Common"
+              "name": "Gothorita (B)",
+              "note": "31-34 | Rarity: Common",
+              "versionTag": "B"
             },
             {
               "name": "Liepard",
@@ -3417,16 +3350,18 @@ export const data = {
           "type": "dark-grass",
           "entries": [
             {
-              "name": "Duosion",
-              "note": "36-39 | Rarity: Common"
+              "name": "Duosion (W)",
+              "note": "36-39 | Rarity: Common",
+              "versionTag": "W"
             },
             {
               "name": "Garbodor",
               "note": "36-38 | Rarity: Uncommon"
             },
             {
-              "name": "Gothorita",
-              "note": "36-39 | Rarity: Common"
+              "name": "Gothorita (B)",
+              "note": "36-39 | Rarity: Common",
+              "versionTag": "B"
             },
             {
               "name": "Liepard",
@@ -3458,20 +3393,24 @@ export const data = {
               "note": "Rarity: Uncommon"
             },
             {
-              "name": "Gothitelle",
-              "note": "Rarity: Rare"
+              "name": "Gothitelle (B)",
+              "note": "Rarity: Rare",
+              "versionTag": "B"
             },
             {
-              "name": "Houndour",
-              "note": "31-32 | Rarity: Common"
+              "name": "Houndour (B)",
+              "note": "31-32 | Rarity: Common",
+              "versionTag": "B"
             },
             {
-              "name": "Poochyena",
-              "note": "31-32 | Rarity: Common"
+              "name": "Poochyena (W)",
+              "note": "31-32 | Rarity: Common",
+              "versionTag": "W"
             },
             {
-              "name": "Reuniclus",
-              "note": "Rarity: Rare"
+              "name": "Reuniclus (W)",
+              "note": "Rarity: Rare",
+              "versionTag": "W"
             }
           ]
         }
@@ -3508,11 +3447,7 @@ export const data = {
           "entries": [
             {
               "name": "Basculin",
-              "note": "5-20 | Rarity: Common"
-            },
-            {
-              "name": "Basculin",
-              "note": "35-60 | Rarity: Common"
+              "note": "5-20 | Rarity: Common | 35-60 | Rarity: Common"
             },
             {
               "name": "Goldeen",
@@ -3535,11 +3470,7 @@ export const data = {
           "entries": [
             {
               "name": "Boldore",
-              "note": "28-31 | Rarity: Common"
-            },
-            {
-              "name": "Boldore",
-              "note": "29-30 | Rarity: Common"
+              "note": "28-31 | Rarity: Common | 29-30 | Rarity: Common"
             },
             {
               "name": "Cryogonal",
@@ -3547,35 +3478,15 @@ export const data = {
             },
             {
               "name": "Cubchoo",
-              "note": "28-31 | Rarity: Common"
-            },
-            {
-              "name": "Cubchoo",
-              "note": "Rarity: Rare"
-            },
-            {
-              "name": "Cubchoo",
-              "note": "Rarity: Uncommon"
+              "note": "28-31 | Rarity: Common | Rarity: Rare | Rarity: Uncommon"
             },
             {
               "name": "Gurdurr",
-              "note": "28-30 | Rarity: Common"
-            },
-            {
-              "name": "Gurdurr",
-              "note": "Rarity: Uncommon"
+              "note": "28-30 | Rarity: Common | Rarity: Uncommon"
             },
             {
               "name": "Woobat",
-              "note": "28-31 | Rarity: Uncommon"
-            },
-            {
-              "name": "Woobat",
-              "note": "28-30 | Rarity: Uncommon"
-            },
-            {
-              "name": "Woobat",
-              "note": "29-31 | Rarity: Uncommon"
+              "note": "28-31 | Rarity: Uncommon | 28-30 | Rarity: Uncommon | 29-31 | Rarity: Uncommon"
             }
           ]
         },
@@ -3757,15 +3668,7 @@ export const data = {
           "entries": [
             {
               "name": "Boldore",
-              "note": "Rarity: Uncommon"
-            },
-            {
-              "name": "Boldore",
-              "note": "37-39 | Rarity: Common"
-            },
-            {
-              "name": "Boldore",
-              "note": "39-41 | Rarity: Common"
+              "note": "Rarity: Uncommon | 37-39 | Rarity: Common | 39-41 | Rarity: Common"
             },
             {
               "name": "Deino",
@@ -3773,11 +3676,7 @@ export const data = {
             },
             {
               "name": "Durant",
-              "note": "37-40 | Rarity: Common"
-            },
-            {
-              "name": "Durant",
-              "note": "39-42 | Rarity: Common"
+              "note": "37-40 | Rarity: Common | 39-42 | Rarity: Common"
             },
             {
               "name": "Fraxure",
@@ -3792,24 +3691,18 @@ export const data = {
               "note": "Rarity: Uncommon"
             },
             {
-              "name": "Rufflet",
-              "note": "38-39 | Rarity: Common"
+              "name": "Rufflet (W)",
+              "note": "38-39 | Rarity: Common",
+              "versionTag": "W"
             },
             {
-              "name": "Vullaby",
-              "note": "38-39 | Rarity: Common"
-            },
-            {
-              "name": "Woobat",
-              "note": "Rarity: Uncommon"
-            },
-            {
-              "name": "Woobat",
-              "note": "37-40 | Rarity: Uncommon"
+              "name": "Vullaby (B)",
+              "note": "38-39 | Rarity: Common",
+              "versionTag": "B"
             },
             {
               "name": "Woobat",
-              "note": "39-42 | Rarity: Uncommon"
+              "note": "Rarity: Uncommon | 37-40 | Rarity: Uncommon | 39-42 | Rarity: Uncommon"
             }
           ]
         },
@@ -3844,19 +3737,11 @@ export const data = {
           "entries": [
             {
               "name": "Basculin",
-              "note": "20-50 | Rarity: Common"
-            },
-            {
-              "name": "Basculin",
-              "note": "35-60 | Rarity: Common"
+              "note": "20-50 | Rarity: Common | 35-60 | Rarity: Common"
             },
             {
               "name": "Excadrill",
-              "note": "37-40 | Rarity: Common"
-            },
-            {
-              "name": "Excadrill",
-              "note": "39-42 | Rarity: Common"
+              "note": "37-40 | Rarity: Common | 39-42 | Rarity: Common"
             },
             {
               "name": "Poliwhirl",
@@ -3886,16 +3771,18 @@ export const data = {
               "note": "47-49 | Rarity: Common"
             },
             {
-              "name": "Rufflet",
-              "note": "48-50 | Rarity: Uncommon"
+              "name": "Rufflet (W)",
+              "note": "48-50 | Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
               "name": "Seviper",
               "note": "48-50 | Rarity: Uncommon"
             },
             {
-              "name": "Vullaby",
-              "note": "48-50 | Rarity: Uncommon"
+              "name": "Vullaby (B)",
+              "note": "48-50 | Rarity: Uncommon",
+              "versionTag": "B"
             },
             {
               "name": "Zangoose",
@@ -3911,16 +3798,18 @@ export const data = {
               "note": "57-59 | Rarity: Common"
             },
             {
-              "name": "Braviary",
-              "note": "58-60 | Rarity: Uncommon"
+              "name": "Braviary (W)",
+              "note": "58-60 | Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
               "name": "Golduck",
               "note": "57-59 | Rarity: Common"
             },
             {
-              "name": "Mandibuzz",
-              "note": "58-60 | Rarity: Uncommon"
+              "name": "Mandibuzz (B)",
+              "note": "58-60 | Rarity: Uncommon",
+              "versionTag": "B"
             },
             {
               "name": "Seviper",
@@ -3946,11 +3835,7 @@ export const data = {
           "entries": [
             {
               "name": "Basculin",
-              "note": "35-55 | Rarity: Common"
-            },
-            {
-              "name": "Basculin",
-              "note": "35-60 | Rarity: Common"
+              "note": "35-55 | Rarity: Common | 35-60 | Rarity: Common"
             },
             {
               "name": "Carvanha",
@@ -3967,11 +3852,7 @@ export const data = {
             },
             {
               "name": "Basculin",
-              "note": "25-70 | Rarity: Common"
-            },
-            {
-              "name": "Basculin",
-              "note": "35-60 | Rarity: Common"
+              "note": "25-70 | Rarity: Common | 35-60 | Rarity: Common"
             },
             {
               "name": "Carvanha",
@@ -4041,11 +3922,7 @@ export const data = {
           "entries": [
             {
               "name": "Basculin",
-              "note": "5-20 | Rarity: Common"
-            },
-            {
-              "name": "Basculin",
-              "note": "35-60 | Rarity: Common"
+              "note": "5-20 | Rarity: Common | 35-60 | Rarity: Common"
             },
             {
               "name": "Drilbur",
@@ -4071,120 +3948,149 @@ export const data = {
           "type": "grass",
           "entries": [
             {
-              "name": "Abra",
-              "note": "Rarity: Uncommon"
+              "name": "Abra (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Aron",
-              "note": "Rarity: Uncommon"
+              "name": "Aron (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Azurill",
-              "note": "Rarity: Uncommon"
+              "name": "Azurill (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Bagon",
-              "note": "Rarity: Uncommon"
+              "name": "Bagon (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Bellsprout",
-              "note": "Rarity: Uncommon"
+              "name": "Bellsprout (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Budew",
-              "note": "Rarity: Uncommon"
+              "name": "Budew (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Elekid",
-              "note": "Rarity: Uncommon"
+              "name": "Elekid (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Gastly",
-              "note": "Rarity: Uncommon"
+              "name": "Gastly (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Happiny",
-              "note": "Rarity: Uncommon"
+              "name": "Happiny (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Hoppip",
-              "note": "Rarity: Uncommon"
+              "name": "Hoppip (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Machop",
-              "note": "Rarity: Uncommon"
+              "name": "Machop (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Magby",
-              "note": "Rarity: Uncommon"
+              "name": "Magby (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Magnemite",
-              "note": "Rarity: Uncommon"
+              "name": "Magnemite (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Mareep",
-              "note": "Rarity: Uncommon"
+              "name": "Mareep (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Nidoran♀",
-              "note": "Rarity: Uncommon"
+              "name": "Nidoran♀ (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Nidoran♂",
-              "note": "Rarity: Uncommon"
+              "name": "Nidoran♂ (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Oddish",
-              "note": "Rarity: Uncommon"
+              "name": "Oddish (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Pidgey",
-              "note": "Rarity: Uncommon"
+              "name": "Pidgey (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Porygon",
-              "note": "Rarity: Uncommon"
+              "name": "Porygon (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Ralts",
-              "note": "Rarity: Uncommon"
+              "name": "Ralts (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Rhyhorn",
-              "note": "Rarity: Uncommon"
+              "name": "Rhyhorn (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Seedot",
-              "note": "Rarity: Uncommon"
+              "name": "Seedot (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Shinx",
-              "note": "Rarity: Uncommon"
+              "name": "Shinx (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Slakoth",
-              "note": "Rarity: Uncommon"
+              "name": "Slakoth (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Starly",
-              "note": "Rarity: Uncommon"
+              "name": "Starly (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Togepi",
-              "note": "Rarity: Uncommon"
+              "name": "Togepi (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Trapinch",
-              "note": "Rarity: Uncommon"
+              "name": "Trapinch (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Whismur",
-              "note": "Rarity: Uncommon"
+              "name": "Whismur (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Wurmple",
-              "note": "Rarity: Uncommon"
+              "name": "Wurmple (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             }
           ]
         },
@@ -4192,20 +4098,24 @@ export const data = {
           "type": "surfing",
           "entries": [
             {
-              "name": "Corphish",
-              "note": "Rarity: Uncommon"
+              "name": "Corphish (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Lotad",
-              "note": "Rarity: Uncommon"
+              "name": "Lotad (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Surskit",
-              "note": "Rarity: Uncommon"
+              "name": "Surskit (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             },
             {
-              "name": "Wooper",
-              "note": "Rarity: Uncommon"
+              "name": "Wooper (W)",
+              "note": "Rarity: Uncommon",
+              "versionTag": "W"
             }
           ]
         }
@@ -4216,5 +4126,3 @@ export const data = {
 
 export const locations: ReadonlyArray<Location> = data.locations as unknown as Location[];
 export default locations;
-// Legacy alias for earlier import style
-export const locationsData = locations;

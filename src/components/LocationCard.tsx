@@ -1,5 +1,5 @@
 import { Location } from '../data/locations'
-import EncounterTable from './EncounterTable'
+import EncounterTable from './EncounterTable.tsx'
 import './LocationCard.css'
 
 interface LocationCardProps {
@@ -13,9 +13,11 @@ interface LocationCardProps {
   methodExpanded: Record<string, boolean>
   onToggleMethod: (locId: string, method: string) => void
   onSetAllMethods: (expanded: boolean) => void
+  hideBlack: boolean
+  hideWhite: boolean
 }
 
-export default function LocationCard({ location, checkedEncounters, selectedMap, onToggleEncounter, onSelectEncounter, expanded, onToggle, methodExpanded, onToggleMethod, onSetAllMethods }: LocationCardProps) {
+export default function LocationCard({ location, checkedEncounters, selectedMap, onToggleEncounter, onSelectEncounter, expanded, onToggle, methodExpanded, onToggleMethod, onSetAllMethods, hideBlack, hideWhite }: LocationCardProps) {
   const methodLabels: Record<string, string> = {
     'grass': '🌱 Grass',
     'dark-grass': '🌿 Dark Grass',
@@ -39,6 +41,12 @@ export default function LocationCard({ location, checkedEncounters, selectedMap,
           {location.encounters.map((encounter, idx) => {
             const mKey = `${location.id}:${encounter.type}`
             const isOpen = methodExpanded[mKey] ?? false
+            const hasVisible = encounter.entries.some(e => {
+              if (hideBlack && e.versionTag === 'B') return false
+              if (hideWhite && e.versionTag === 'W') return false
+              return true
+            })
+            if (!hasVisible) return null
             return (
               <div key={mKey} className="method-wrapper">
                 <div className="method-header" onClick={() => onToggleMethod(location.id, encounter.type)} role="button" tabIndex={0}>
@@ -53,6 +61,8 @@ export default function LocationCard({ location, checkedEncounters, selectedMap,
                     onToggleEncounter={onToggleEncounter}
                     selectedMap={selectedMap}
                     onSelectEncounter={onSelectEncounter}
+                    hideBlack={hideBlack}
+                    hideWhite={hideWhite}
                   />
                 )}
               </div>

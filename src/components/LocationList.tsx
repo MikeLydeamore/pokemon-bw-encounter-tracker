@@ -1,5 +1,5 @@
 import { Location } from '../data/locations'
-import LocationCard from './LocationCard'
+import LocationCard from './LocationCard.tsx'
 import './LocationList.css'
 
 interface LocationListProps {
@@ -13,12 +13,21 @@ interface LocationListProps {
   methodExpanded: Record<string, boolean>
   onToggleMethod: (locId: string, method: string) => void
   onSetLocationMethods: (locId: string, expanded: boolean) => void
+  hideBlack: boolean
+  hideWhite: boolean
 }
 
-export default function LocationList({ locations, checkedEncounters, selectedMap, onToggleEncounter, onSelectEncounter, locationExpanded, onToggleLocation, methodExpanded, onToggleMethod, onSetLocationMethods }: LocationListProps) {
+export default function LocationList({ locations, checkedEncounters, selectedMap, onToggleEncounter, onSelectEncounter, locationExpanded, onToggleLocation, methodExpanded, onToggleMethod, onSetLocationMethods, hideBlack, hideWhite }: LocationListProps) {
   return (
     <div className="location-list">
-      {locations.map(location => (
+      {locations.filter(location => {
+        // Only show locations with at least one visible entry after version filters
+        return location.encounters.some(m => m.entries.some(e => {
+          if (hideBlack && e.versionTag === 'B') return false
+          if (hideWhite && e.versionTag === 'W') return false
+          return true
+        }))
+      }).map(location => (
         <LocationCard
           key={location.id}
           location={location}
@@ -31,6 +40,8 @@ export default function LocationList({ locations, checkedEncounters, selectedMap
           methodExpanded={methodExpanded}
           onToggleMethod={onToggleMethod}
           onSetAllMethods={(expanded: boolean) => onSetLocationMethods(location.id, expanded)}
+          hideBlack={hideBlack}
+          hideWhite={hideWhite}
         />
       ))}
     </div>

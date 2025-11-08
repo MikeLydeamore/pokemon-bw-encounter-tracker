@@ -9,9 +9,11 @@ interface EncounterTableProps {
   selectedMap: Record<string, string>
   onToggleEncounter: (id: string) => void
   onSelectEncounter: (id: string, species: string) => void
+  hideBlack?: boolean
+  hideWhite?: boolean
 }
 
-export default function EncounterTable({ locationId, encounter, checkedEncounters, selectedMap, onToggleEncounter, onSelectEncounter }: EncounterTableProps) {
+export default function EncounterTable({ locationId, encounter, checkedEncounters, selectedMap, onToggleEncounter, onSelectEncounter, hideBlack = false, hideWhite = false }: EncounterTableProps) {
   return (
     <div className="encounter-table">
       <table>
@@ -25,6 +27,9 @@ export default function EncounterTable({ locationId, encounter, checkedEncounter
         </thead>
         <tbody>
           {encounter.entries.map((entry, idx) => {
+            if ((hideBlack && entry.versionTag === 'B') || (hideWhite && entry.versionTag === 'W')) {
+              return null
+            }
             const encounterId = `${locationId}-${encounter.type}-${idx}`
             const isChecked = checkedEncounters.has(encounterId)
             const rateOrNote = entry.rate != null ? `${entry.rate}%` : (entry.note ?? '')

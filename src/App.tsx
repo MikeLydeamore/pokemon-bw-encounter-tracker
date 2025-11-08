@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import './App.css'
 import LocationList from './components/LocationList'
-import { locationsData } from './data/locations'
+import locations from './data/locations'
 import { allPokemon } from './data/pokemon'
 
 function App() {
@@ -34,23 +34,61 @@ function App() {
 
   const filteredLocations = useMemo(() => {
     const q = query.trim().toLowerCase()
-    if (!q) return locationsData
-    return locationsData.filter(loc => loc.name.toLowerCase().includes(q))
+    if (!q) return locations
+    return locations.filter(loc => loc.name.toLowerCase().includes(q))
   }, [query])
 
-  // Compute total slots and set of valid encounter ids
+  // Version exclusive hide toggles (hide entries whose versionTag matches)
+  const [hideBlack, setHideBlack] = useState<boolean>(() => {
+    try { return localStorage.getItem('bw-hide-black') === 'true' } catch { return false }
+  })
+  const [hideWhite, setHideWhite] = useState<boolean>(() => {
+    try { return localStorage.getItem('bw-hide-white') === 'true' } catch { return false }
+  })
+
+  useEffect(() => { try { localStorage.setItem('bw-hide-black', String(hideBlack)) } catch {} }, [hideBlack])
+  useEffect(() => { try { localStorage.setItem('bw-hide-white', String(hideWhite)) } catch {} }, [hideWhite])
+
+  // Compute total visible slots (respect version-exclusive hide toggles)
   const totalSlots = useMemo(() => {
     let total = 0
-    for (const loc of locationsData) {
+    for (const loc of locations) {
       for (const m of loc.encounters) {
-        total += m.entries.length
+        for (let i = 0; i < m.entries.length; i++) {
+          const e = m.entries[i]
+          if (hideBlack && e.versionTag === 'B') continue
+          if (hideWhite && e.versionTag === 'W') continue
+          total += 1
+        }
       }
     }
     return total
-  }, [])
+  }, [hideBlack, hideWhite])
 
-  // Number of checked/ticked encounters
-  const tickedCount = useMemo(() => checkedEncounters.size, [checkedEncounters])
+  // Number of checked/ticked encounters among visible entries only
+  const tickedCount = useMemo(() => {
+    let count = 0
+    for (const id of checkedEncounters) {
+      // id format: locId-methodType-idx (methodType may contain '-')
+      const parts = id.split('-')
+      if (parts.length < 3) continue
+      const locId = parts[0]
+      const idxStr = parts[parts.length - 1]
+      const methodType = parts.slice(1, parts.length - 1).join('-')
+      const idx = Number(idxStr)
+      if (Number.isNaN(idx)) continue
+      const loc = locations.find(l => l.id === locId)
+      if (!loc) continue
+      const method = loc.encounters.find(m => m.type === methodType)
+      if (!method) continue
+      const entry = method.entries[idx]
+      if (!entry) continue
+      if (hideBlack && entry.versionTag === 'B') continue
+      if (hideWhite && entry.versionTag === 'W') continue
+      count++
+    }
+    return count
+  }, [checkedEncounters, hideBlack, hideWhite])
 
   const uniqueSpeciesCount = useMemo(() => {
     const s = new Set<string>()
@@ -122,7 +160,7 @@ function App() {
   const toggleLocation = (locId: string) => {
     setLocationExpanded(prev => {
       const next = { ...prev, [locId]: !prev[locId] }
-      try { localStorage.setItem('bw-encounters-loc-expanded', JSON.stringify(next)) } catch {}
+      try { localStorage.setItem('bw-encounters-loc-expanded', JSON.stringify(next)) } catch { }
       return next
     })
   }
@@ -131,7 +169,7 @@ function App() {
     const key = `${locId}:${method}`
     setMethodExpanded(prev => {
       const next = { ...prev, [key]: !prev[key] }
-      try { localStorage.setItem('bw-encounters-method-expanded', JSON.stringify(next)) } catch {}
+      try { localStorage.setItem('bw-encounters-method-expanded', JSON.stringify(next)) } catch { }
       return next
     })
   }
@@ -139,19 +177,19 @@ function App() {
   const setLocationMethodsExpanded = (locId: string, expanded: boolean) => {
     setMethodExpanded(prev => {
       const next = { ...prev }
-      const loc = locationsData.find(l => l.id === locId)
+      const loc = locations.find(l => l.id === locId)
       if (loc) {
         for (const m of loc.encounters) {
           next[`${locId}:${m.type}`] = expanded
         }
       }
-      try { localStorage.setItem('bw-encounters-method-expanded', JSON.stringify(next)) } catch {}
+      try { localStorage.setItem('bw-encounters-method-expanded', JSON.stringify(next)) } catch { }
       return next
     })
     if (expanded) {
       setLocationExpanded(prev => {
         const next = { ...prev, [locId]: true }
-        try { localStorage.setItem('bw-encounters-loc-expanded', JSON.stringify(next)) } catch {}
+        try { localStorage.setItem('bw-encounters-loc-expanded', JSON.stringify(next)) } catch { }
         return next
       })
     }
@@ -160,7 +198,7 @@ function App() {
   const setAllExpanded = (expanded: boolean) => {
     const nextLoc: Record<string, boolean> = {}
     const nextMeth: Record<string, boolean> = {}
-    for (const loc of locationsData) {
+    for (const loc of locations) {
       nextLoc[loc.id] = expanded
       for (const m of loc.encounters) {
         nextMeth[`${loc.id}:${m.type}`] = expanded
@@ -171,7 +209,7 @@ function App() {
     try {
       localStorage.setItem('bw-encounters-loc-expanded', JSON.stringify(nextLoc))
       localStorage.setItem('bw-encounters-method-expanded', JSON.stringify(nextMeth))
-    } catch {}
+    } catch { }
   }
 
   // Load persisted expansion state once
@@ -181,7 +219,7 @@ function App() {
       if (locRaw) setLocationExpanded(JSON.parse(locRaw))
       const methRaw = localStorage.getItem('bw-encounters-method-expanded')
       if (methRaw) setMethodExpanded(JSON.parse(methRaw))
-    } catch {}
+    } catch { }
   }, [])
 
   const exportData = () => {
@@ -265,6 +303,23 @@ function App() {
               </button>
             )}
           </div>
+          <div className="version-hide-controls" role="group" aria-label="Hide version exclusive encounters">
+            <span className="vh-label">Hide Version Exclusives:</span>
+            <label className="vh-opt">
+              <input
+                type="checkbox"
+                checked={hideBlack}
+                onChange={(e) => setHideBlack(e.target.checked)}
+              /> Black
+            </label>
+            <label className="vh-opt">
+              <input
+                type="checkbox"
+                checked={hideWhite}
+                onChange={(e) => setHideWhite(e.target.checked)}
+              /> White
+            </label>
+          </div>
         </div>
         <div className="header-actions">
           <button onClick={exportData} className="clear-btn" title="Export progress to file">💾 Export</button>
@@ -286,6 +341,8 @@ function App() {
           methodExpanded={methodExpanded}
           onToggleMethod={toggleMethod}
           onSetLocationMethods={setLocationMethodsExpanded}
+          hideBlack={hideBlack}
+          hideWhite={hideWhite}
         />
       </main>
     </div>

@@ -50,22 +50,60 @@ def transform(input_json: Path) -> Dict[str, Any]:
             if not entries:
                 continue
 
-            # Normalize entries and drop exact duplicates
-            norm_entries: List[Dict[str, Any]] = []
-            seen = set()
+            # Merge duplicates by Pokemon and encode BW exclusivity as (B)/(W)
+            grouped: Dict[str, List[Dict[str, Any]]] = {}
             for e in entries:
                 pokemon = (e.get("pokemon") or "").strip()
-                rate = e.get("rate")
-                note = (e.get("note") or "").strip() or None
-                key = (pokemon, rate, note)
-                if key in seen:
+                if not pokemon:
                     continue
-                seen.add(key)
-                row: Dict[str, Any] = {"name": pokemon}
-                if isinstance(rate, int):
-                    row["rate"] = rate
-                if note:
-                    row["note"] = note
+                grouped.setdefault(pokemon.lower(), []).append(e)
+
+            norm_entries: List[Dict[str, Any]] = []
+            for key, group_rows in grouped.items():
+                versions_set = set()
+                notes_collected: List[str] = []
+                rates: List[int] = []
+                name_base = group_rows[0].get("pokemon")
+                for r in group_rows:
+                    vlist = r.get("versions")
+                    if vlist is None:
+                        versions_set.update(["black", "white"])  # unknown -> treat as both
+                    else:
+                        versions_set.update(vlist)
+                    note_val = (r.get("note") or "").strip()
+                    if note_val:
+                        notes_collected.append(note_val)
+                    rate_val = r.get("rate")
+                    if isinstance(rate_val, int):
+                        rates.append(rate_val)
+
+                # Rate: choose the max
+                rate_out = max(rates) if rates else None
+
+                # Merge notes without duplicates
+                merged_note = None
+                if notes_collected:
+                    dedup_notes = list(dict.fromkeys(notes_collected))
+                    merged_note = " | ".join(dedup_notes)
+
+                has_black = 'black' in versions_set
+                has_white = 'white' in versions_set
+                version_tag = None
+                name_final = name_base
+                if has_black and not has_white:
+                    version_tag = 'B'
+                    name_final = f"{name_base} (B)"
+                elif has_white and not has_black:
+                    version_tag = 'W'
+                    name_final = f"{name_base} (W)"
+
+                row: Dict[str, Any] = {"name": name_final}
+                if isinstance(rate_out, int):
+                    row["rate"] = rate_out
+                if merged_note:
+                    row["note"] = merged_note
+                if version_tag:
+                    row["versionTag"] = version_tag
                 norm_entries.append(row)
 
             if norm_entries:
@@ -102,9 +140,10 @@ export type EncounterType =
   | 'special';
 
 export interface EncounterEntry {
-  name: string;
-  rate?: number; // percent if available
-  note?: string; // levels/rarity or extra notes
+    name: string; // may include (B) or (W) suffix for version exclusives
+    rate?: number; // percent if available
+    note?: string; // levels/rarity or extra notes
+    versionTag?: 'B' | 'W'; // present if exclusive to one version
 }
 
 export interface EncounterMethod {

@@ -60,6 +60,9 @@ class EncounterEntry:
     pokemon: str
     rate: Optional[int]  # percentage if present
     note: Optional[str] = None  # freeform note (level range etc.)
+    # Which versions this row applies to (from per-game columns). None means unknown/all.
+    # Values: 'black', 'white'.
+    versions: Optional[List[str]] = None
 
 
 @dataclass
@@ -149,33 +152,32 @@ def next_element_table(start: Tag) -> Optional[Tag]:
     return None
 
 
-def extract_bw_rows_only(row: Tag) -> bool:
+def parse_bw_versions(row: Tag) -> Tuple[bool, bool, bool]:
     """
-    Include only rows that apply to Pokémon Black/White (BW), not BW2-only.
-    PokémonDB uses per-game cells with classes:
-      - cell-loc-game-B5 / cell-loc-game-W5 for BW
-      - cell-loc-game-B25 / cell-loc-game-W25 for BW2
-      - cell-loc-game-blank when that game does not apply
-    We include a row if any BW cell is present (B5 or W5). If only BW2 cells are present, exclude.
-    If the structure lacks game cells entirely, we keep the row (some tables may be generic).
+    Parse per-game cells to determine whether a row applies to BW (Black/White) and/or BW2,
+    and whether per-game columns exist. Returns (has_black, has_white, had_game_cells).
     """
     cells = row.select('td.cell-loc-game')
     if not cells:
-        return True  # no explicit per-game markup; keep
+        # No per-game columns present
+        return True, True, False
 
-    def cls_has(td: Tag, key: str) -> bool:
+    def has(td: Tag, key: str) -> bool:
         classes = td.get('class') or []
         return key in classes
 
-    has_bw = any(cls_has(td, 'cell-loc-game-B5') or cls_has(td, 'cell-loc-game-W5') for td in cells)
-    has_bw2 = any(cls_has(td, 'cell-loc-game-B25') or cls_has(td, 'cell-loc-game-W25') for td in cells)
+    has_black = any(has(td, 'cell-loc-game-B5') for td in cells)
+    has_white = any(has(td, 'cell-loc-game-W5') for td in cells)
+    # We don't need BW2 flags to include, but used by callers if needed
+    return has_black, has_white, True
 
-    if has_bw:
+
+def extract_bw_rows_only(row: Tag) -> bool:
+    """Keep only rows that apply to BW (Black or White), exclude BW2-only rows."""
+    has_black, has_white, had_cells = parse_bw_versions(row)
+    if not had_cells:
         return True
-    if has_bw2 and not has_bw:
-        return False
-    # If no explicit BW or BW2 markers found, be conservative and exclude
-    return False
+    return bool(has_black or has_white)
 
 
 def parse_rate(text: str) -> Optional[int]:
@@ -231,7 +233,20 @@ def parse_row(row: Tag) -> Optional[EncounterEntry]:
         else:
             note = f"Rarity: {rarity_note}"
 
-    return EncounterEntry(pokemon=pokemon, rate=rate, note=note)
+    # Version flags
+    has_black, has_white, had_cells = parse_bw_versions(row)
+    versions: Optional[List[str]]
+    if not had_cells:
+        versions = None  # unknown -> treat as both in downstream
+    else:
+        v: List[str] = []
+        if has_black:
+            v.append('black')
+        if has_white:
+            v.append('white')
+        versions = v if v else None
+
+    return EncounterEntry(pokemon=pokemon, rate=rate, note=note, versions=versions)
 
 
 def parse_location_page(session: requests.Session, name: str, url: str, verbose: bool = False) -> LocationData:
