@@ -120,12 +120,20 @@ function App() {
   }
 
   const toggleLocation = (locId: string) => {
-    setLocationExpanded(prev => ({ ...prev, [locId]: !prev[locId] }))
+    setLocationExpanded(prev => {
+      const next = { ...prev, [locId]: !prev[locId] }
+      try { localStorage.setItem('bw-encounters-loc-expanded', JSON.stringify(next)) } catch {}
+      return next
+    })
   }
 
   const toggleMethod = (locId: string, method: string) => {
     const key = `${locId}:${method}`
-    setMethodExpanded(prev => ({ ...prev, [key]: !prev[key] }))
+    setMethodExpanded(prev => {
+      const next = { ...prev, [key]: !prev[key] }
+      try { localStorage.setItem('bw-encounters-method-expanded', JSON.stringify(next)) } catch {}
+      return next
+    })
   }
 
   const setLocationMethodsExpanded = (locId: string, expanded: boolean) => {
@@ -137,10 +145,15 @@ function App() {
           next[`${locId}:${m.type}`] = expanded
         }
       }
+      try { localStorage.setItem('bw-encounters-method-expanded', JSON.stringify(next)) } catch {}
       return next
     })
     if (expanded) {
-      setLocationExpanded(prev => ({ ...prev, [locId]: true }))
+      setLocationExpanded(prev => {
+        const next = { ...prev, [locId]: true }
+        try { localStorage.setItem('bw-encounters-loc-expanded', JSON.stringify(next)) } catch {}
+        return next
+      })
     }
   }
 
@@ -155,7 +168,21 @@ function App() {
     }
     setLocationExpanded(nextLoc)
     setMethodExpanded(nextMeth)
+    try {
+      localStorage.setItem('bw-encounters-loc-expanded', JSON.stringify(nextLoc))
+      localStorage.setItem('bw-encounters-method-expanded', JSON.stringify(nextMeth))
+    } catch {}
   }
+
+  // Load persisted expansion state once
+  useEffect(() => {
+    try {
+      const locRaw = localStorage.getItem('bw-encounters-loc-expanded')
+      if (locRaw) setLocationExpanded(JSON.parse(locRaw))
+      const methRaw = localStorage.getItem('bw-encounters-method-expanded')
+      if (methRaw) setMethodExpanded(JSON.parse(methRaw))
+    } catch {}
+  }, [])
 
   const exportData = () => {
     const data = {

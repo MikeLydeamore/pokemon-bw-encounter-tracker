@@ -11,20 +11,9 @@ interface EncounterTableProps {
   onSelectEncounter: (id: string, species: string) => void
 }
 
-const methodLabels: Record<string, string> = {
-  'grass': '🌱 Grass',
-  'dark-grass': '🌿 Dark Grass',
-  'cave': '🕳️ Cave',
-  'surfing': '🌊 Surfing',
-  'super-rod': '🎣 Super Rod',
-  'fishing': '🎣 Fishing',
-  'special': '⭐ Special'
-}
-
 export default function EncounterTable({ locationId, encounter, checkedEncounters, selectedMap, onToggleEncounter, onSelectEncounter }: EncounterTableProps) {
   return (
     <div className="encounter-table">
-      <h3 className="encounter-method">{methodLabels[encounter.type]}</h3>
       <table>
         <thead>
           <tr>
